@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { decrementQuantity, increaseQuantity } from '../redux/CartSlice'
+import { decrementQuantity, increaseQuantity, removeItem } from '../redux/CartSlice'
 
 const Cart = () => {
     const cartItemsLength= useSelector((state)=>{ return state.cart.items.length})
@@ -14,9 +14,10 @@ const Cart = () => {
         selectedItems.map((item)=>{
             return (
                 <div key={item.id}>
-                    {item.name} : {item.quatity}
+                    {item.name} : {item.quantity}
                     <button  onClick={()=>{dispatch(increaseQuantity(item.id))}}>+</button>
                     <button onClick={()=>{dispatch(decrementQuantity(item.id))}}>-</button>
+                   <button onClick={()=>{dispatch(removeItem(item.id))}}>X</button>
                 </div>
             )
         })
